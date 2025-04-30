@@ -33,7 +33,7 @@ exports.handler = async (event, context) => {
       throw new Error('Variáveis de ambiente dos números do WhatsApp não configuradas.');
     }
     
-    const mensagem = 'Opa%21+Vim+pela+Bio+do+instagram%2C+gostaria+de+saber+mais+como+voces+pod%C3%AAm+me+ajudar.';
+    const mensagem = 'Opa%21+Vim+pelo+Anuncio+do+instagram%2C+gostaria+de+saber+mais+como+voces+pod%C3%AAm+me+ajudar.';
     
     console.log("Valor de currentIndex:", currentIndex);
     let redirectTo = (currentIndex % 2 === 0)
