@@ -26,7 +26,7 @@ exports.handler = async (event, context) => {
     );
     const currentIndex = findResult ? findResult.index : 1;
 // whats app 1 thiago ; whats app 2 joice
-    let whatsappNumber1 = process.env.WHATSAPP_NUMBER_2;
+    let whatsappNumber1 = process.env.WHATSAPP_NUMBER_1;
     let whatsappNumber2 = process.env.WHATSAPP_NUMBER_2;
 
     if (!whatsappNumber1 || !whatsappNumber2) {
@@ -55,14 +55,9 @@ exports.handler = async (event, context) => {
     if (activeWhatsappNumbers.length === 0) {
       // CENÁRIO: Ambos os vendedores estão de folga (ex: regras futuras, ou se os números não estivessem configurados corretamente e essa validação não fosse um 'throw error').
       // De acordo com a sua solicitação, neste caso, mantemos a distribuição padrão intercalada.
-      console.warn("Ambos os vendedores estão de folga, mas o lead será distribuído via round-robin padrão.");
-      redirectTo = (currentIndex % 2 === 0)
-        ? `https://wa.me/${whatsappNumber1}?text=${mensagem}`
-        : `https://wa.me/${whatsappNumber2}?text=${mensagem}`;
+      console.warn("Ambos os vendedores estão de folga, Redirecionando para a landing page padrão.");
+      redirectTo = "https://metodo-sparta.vercel.app/";
       
-      // Registra o status de 'folga' para o vendedor que recebeu o lead
-      assignedVendor = (currentIndex % 2 === 0) ? 'vendor1_off_duty_assigned' : 'vendor2_off_duty_assigned';
-
     } else if (activeWhatsappNumbers.length === 1) {
       // CENÁRIO: Apenas um vendedor está ativo (o outro está de folga)
       redirectTo = `https://wa.me/${activeWhatsappNumbers[0]}?text=${mensagem}`;
